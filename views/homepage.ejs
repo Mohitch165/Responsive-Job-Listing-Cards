@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <title>Mahindra Test</title>
+</head>
+<body>
+    <div class="banner">
+        <img src="./images/bg-header-desktop.svg" alt="" class="desktop"> 
+        <img src="./images/bg-header-mobile.svg" alt="" class="mobile">
+    </div>
+    <div class="search">
+        <form class="search-form" action="/search" method="POST">
+            <input type="text" name="role" placeholder="search">
+        </form>
+    </div>
+    <div class="container_wrap">
+    <% localData.forEach(function(data){ %>
+        <% if(data.new && data.featured === true) { %>
+           <div class= "job_border_margin">
+           <% } else { %>
+            <div class="job">
+    <% } %>
+        <div class="company_image">
+            <img src=" <%= data.logo %>" alt="">
+        </div>
+        <div class="jobs_info">
+            <div class="jobs_companyName">
+                <h1><%= data.company %></h1>
+                <% if(data.new === true) { %>
+                    <span>NEW!</span>
+              <%  } %>
+                <% if(data.featured === true) { %> 
+                    <a>FEATURED</a>
+              <%  }  %>
+            </div>
+            <span class="jobs_position_info"><a class="jobs_position"><%= data.position %></a></span> 
+            <div class="job_roles_technicalities">
+                <% data.languages.slice().reverse().forEach(function (languages){ %>
+                <span class="jobs_role_level_language_tool"><%= languages %></span>
+         <% }) %>
+         <% data.tools.slice().reverse().forEach(function(tools){ %>
+         <span class="jobs_role_level_language_tool"><%= tools %></span>
+         <% }) %> 
+            <span class="jobs_role_level_language_tool"><%= data.level %></span>
+            <div class="jobs_info_technical"><span class="jobs_role_level_language_tool"><%= data.role %></span>
+            </div>
+            </div>
+         <ul class="location_posting_contract">
+             <li><%= data.postedAt %> </li>
+             <li><%= data.contract %> </li>
+             <li><%= data.location %> </li>
+         </ul>
+        </div>
+    </div>
+    <% }); %>
+    </div>
+</body>
+</html>
